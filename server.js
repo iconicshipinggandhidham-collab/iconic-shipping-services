@@ -238,7 +238,7 @@ app.get("/api/admin/stats", auth, adminOnly, async (req,res)=>{
 
 function escapeHtml(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));}
 
-app.get("*",(req,res,next)=>{
+app.use((req,res,next)=>{
   if(req.path.startsWith("/api/")) return next();
   res.sendFile(path.join(__dirname,"public","index.html"));
 });
